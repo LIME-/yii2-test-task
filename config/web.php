@@ -51,6 +51,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'factorization/<num:\d+>' => 'factorization/process',
+                'factorization/delete-cache' => 'factorization/delete-cache',
                 'factorization' => 'factorization/index',
             ]
         ],

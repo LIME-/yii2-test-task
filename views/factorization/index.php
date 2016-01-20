@@ -1,6 +1,7 @@
 <style>
-    .form-inline{margin-bottom: 20px}
+    .form-inline{margin-bottom: 10px}
     #error-msg{color: red}
+    #cache-del{display: inline; margin-bottom: 10px}
 </style>
 
 <div class="page-header"><h1>Факторизация целого числа</h1></div>
@@ -11,7 +12,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Разложить</button>
 </form>
-
+<button type="submit" class="btn btn-primary" id="cache-del">Сбросить кэш</button>
 <div id="error-msg"></div>
 <div id="data-output"></div>
 
@@ -51,6 +52,18 @@
                     }
                 });
             }
+        });
+
+        $('#cache-del').click(function () {
+            $.ajax({
+                url: '/factorization/delete-cache',
+                type: 'GET',
+                dataType: 'json',
+                success: function (ans) {
+                    $dataOutput.html(ans.data);
+                    $errorMsg.text(ans.error);
+                }
+            });
         });
     })(jQuery);
 </script>
