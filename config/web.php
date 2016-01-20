@@ -11,13 +11,15 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'lBnaPbfRsIgl9iHIvfqkLr8H5h_CMYGy',
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 1,
+        ],
         'cache' => [
             'class' => 'yii\redis\Cache',
-            'redis' => [
-                'hostname' => 'localhost',
-                'port' => 6379,
-                'database' => 1,
-            ]
+            'redis' => 'redis'
         ],
         'user' => [
             'identityClass' => 'app\models\User',

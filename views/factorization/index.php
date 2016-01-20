@@ -36,19 +36,21 @@
         $('#factorization-form').submit(function (e) {
             e.preventDefault();
             var num = $num.val();
-            $.ajax({
-                url: '/factorization/' + num,
-                type: 'GET',
-                dataType: 'json',
-                success: function (ans) {
-                    var data = '';
-                    if (ans.data) {
-                        data = num + ' = ' + ans.data.join(' &times ');
+            if (num) {
+                $.ajax({
+                    url: '/factorization/' + num,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (ans) {
+                        var data = '';
+                        if (ans.data) {
+                            data = num + ' = ' + ans.data.join(' &times ');
+                        }
+                        $dataOutput.html(data);
+                        $errorMsg.text(ans.error);
                     }
-                    $dataOutput.html(data);
-                    $errorMsg.text(ans.error);
-                }
-            });
+                });
+            }
         });
     })(jQuery);
 </script>
