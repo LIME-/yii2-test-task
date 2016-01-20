@@ -22,6 +22,7 @@
         var $num = $('#num');
         var $dataOutput = $('#data-output');
         var $errorMsg = $('#error-msg');
+        var $disabled = $('#num, .btn')
 
         $num.keypress(function (e) {
             var theEvent = e || window.event;
@@ -38,6 +39,7 @@
             e.preventDefault();
             var num = $num.val();
             if (num) {
+                $disabled.prop('disabled', true);
                 $.ajax({
                     url: '/factorization/' + num,
                     type: 'GET',
@@ -49,7 +51,10 @@
                         }
                         $dataOutput.html(data);
                         $errorMsg.text(ans.error);
+                        $disabled.prop('disabled', false);
                     }
+                }).fail(function () {
+                    $disabled.prop('disabled', false);
                 });
             }
         });
